@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccb45fw6mxqcp"]
+
+[ext_resource type="Texture2D" uid="uid://dxp2hpu6kpjdc" path="res://Assets/Golf Ball.png" id="1_d60mj"]
+[ext_resource type="Script" uid="uid://n5vggxk2qu0g" path="res://Scenes/ball.gd" id="1_ij5cq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ij5cq"]
+friction = 0.3
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ij5cq"]
+radius = 12.0416
+
+[node name="RigidBody2D" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_ij5cq")
+script = ExtResource("1_ij5cq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_d60mj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_ij5cq")
