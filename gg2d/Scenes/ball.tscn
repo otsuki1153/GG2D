@@ -12,6 +12,7 @@ radius = 12.0416
 
 [node name="RigidBody2D" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_ij5cq")
+gravity_scale = 0.0
 script = ExtResource("1_ij5cq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -22,3 +23,8 @@ texture = ExtResource("1_d60mj")
 visible = false
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_ij5cq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.185, 2.185)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0

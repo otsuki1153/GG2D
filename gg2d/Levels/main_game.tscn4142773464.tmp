@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp27kkm6c7j3c"]
+[gd_scene load_steps=4 format=3 uid="uid://bp27kkm6c7j3c"]
 
 [ext_resource type="Script" uid="uid://lcp2n075ioo6" path="res://Levels/LineDrawer.gd" id="1_73ikp"]
 [ext_resource type="PackedScene" uid="uid://ccb45fw6mxqcp" path="res://Scenes/ball.tscn" id="1_pn46k"]
+[ext_resource type="Script" uid="uid://o5jcg5kxmgb7" path="res://Levels/camera_2d.gd" id="3_4cwk6"]
 
 [node name="MainGame" type="Node2D"]
 
@@ -13,4 +14,6 @@ ball = NodePath("../RigidBody2D")
 position = Vector2(938, 518)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(960, 540)
+offset = Vector2(931.935, 516.48)
+zoom = Vector2(2.855, 2.855)
+script = ExtResource("3_4cwk6")
