@@ -4,7 +4,6 @@ var dragging: bool = false
 var dragStart := Vector2.ZERO
 
 
-
 @onready var line := Line2D.new()
 @export var ball: RigidBody2D
 
