@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cmayp3dqkevjo"
+path="res://.godot/imported/Som Tacada.mp3-81c5eb939e5f0f6dbe5595d4af13d9b5.mp3str"
+
+[deps]
+
+source_file="res://Assets/Som Tacada.mp3"
+dest_files=["res://.godot/imported/Som Tacada.mp3-81c5eb939e5f0f6dbe5595d4af13d9b5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

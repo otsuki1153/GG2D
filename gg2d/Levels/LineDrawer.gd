@@ -2,10 +2,14 @@ extends Node2D
 
 var dragging: bool = false
 var dragStart := Vector2.ZERO
-@export var LimitForce: float = 150
+@export var LimitForce: float = 300
+@export var maxShots: int  = 5
+var shotNumb: int = 0
+@onready var shotLabel := get_node("/root/MainGame/UI/shotLabel")
 
 @onready var line := Line2D.new()
 @export var ball: RigidBody2D
+@onready var cam := ball.get_node("Camera2D")
 
 @onready var  audioToma = $AudioStreamPlayer2D
 
@@ -28,6 +32,7 @@ func _ready() -> void:
 	line.round_precision = 4
 	line.antialiased = true
 	add_child(line)
+	updateShotStatus()
 
 func getMouseCamPosition() -> Vector2:
 	var cam = get_viewport().get_camera_2d()
@@ -39,11 +44,15 @@ func getMouseCamPosition() -> Vector2:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
-			var mouseGlobalPosition = getMouseCamPosition()
-			if ball.global_position.distance_to(mouseGlobalPosition) < 32:
-				dragging = true
-				dragStart = mouseGlobalPosition
+			if ball.linear_velocity.length() < 1.0:
+				var mouseGlobalPosition = getMouseCamPosition()
+				if ball.global_position.distance_to(mouseGlobalPosition) < 32:
+					dragging = true
+					dragStart = mouseGlobalPosition
 		else:
+			if shotNumb >= maxShots:
+				get_tree().reload_current_scene()
+				return
 			if dragging:
 				dragging = false
 				var mouseGlobalPosition = getMouseCamPosition()
@@ -51,22 +60,33 @@ func _unhandled_input(event: InputEvent) -> void:
 				if force.length() > LimitForce:
 					force = force.normalized() * LimitForce
 					mouseGlobalPosition = dragStart - force
-				audioToma.pitch_scale = lerp(1.0, 0.5, force.length() / LimitForce)
-				audioToma.volume_db = lerp(-30.0, 50.0, force.length() / LimitForce)
+				#audioToma.pitch_scale = lerp(1.0, 0.5, force.length() / LimitForce)
+				audioToma.volume_db = lerp(-30.0, 10.0, force.length() / LimitForce)
+				var tween = get_tree().create_tween()
+				tween.tween_property(cam, "zoom", Vector2(1, 1), 0.3)
 				ball.apply_force(force * LimitForce)
+				shotNumb += 1
 				audioToma.play()
+				updateShotStatus()
 	elif event is InputEventMouseMotion and dragging:
+		var tween = get_tree().create_tween()
+		tween.tween_property(cam, "zoom", Vector2(2, 2), 0.3)	
+		if shotNumb >= maxShots:
+			return
 		var mouseGlobalPosition = getMouseCamPosition()
 		var force = dragStart - mouseGlobalPosition
-		
+
 		if force.length() > LimitForce:
 			force = force.normalized() * LimitForce
 			mouseGlobalPosition = dragStart - force
-			
+
 		line.clear_points()
 		line.add_point(ball.global_position)
 		line.add_point(mouseGlobalPosition)
-		
+
 func _physics_process(delta: float) -> void:
 	if !dragging:
 		line.clear_points()
+		
+func updateShotStatus():
+	shotLabel.text = "TACADAS: %d/%d" %[shotNumb, maxShots]
