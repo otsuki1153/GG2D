@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3eegmgshkti4"]
+
+[ext_resource type="Script" uid="uid://lcp2n075ioo6" path="res://Levels/LineDrawer.gd" id="1_ckrvj"]
+
+[node name="LineDrawer" type="Node2D" node_paths=PackedStringArray("ball")]
+script = ExtResource("1_ckrvj")
+LimitForce = 300.0
+ball = NodePath("")

@@ -2,10 +2,13 @@ extends Node2D
 
 var dragging: bool = false
 var dragStart := Vector2.ZERO
-
+@export var LimitForce: float = 150
 
 @onready var line := Line2D.new()
 @export var ball: RigidBody2D
+
+
+
 
 func _ready() -> void:
 	var gradient := Gradient.new()
@@ -43,9 +46,18 @@ func _unhandled_input(event: InputEvent) -> void:
 				dragging = false
 				var mouseGlobalPosition = getMouseCamPosition()
 				var force = dragStart - mouseGlobalPosition
-				ball.apply_force(force * 150.0)
+				if force.length() > LimitForce:
+					force = force.normalized() * LimitForce
+					mouseGlobalPosition = dragStart - force
+				ball.apply_force(force * LimitForce)
 	elif event is InputEventMouseMotion and dragging:
 		var mouseGlobalPosition = getMouseCamPosition()
+		var force = dragStart - mouseGlobalPosition
+		
+		if force.length() > LimitForce:
+			force = force.normalized() * LimitForce
+			mouseGlobalPosition = dragStart - force
+			
 		line.clear_points()
 		line.add_point(ball.global_position)
 		line.add_point(mouseGlobalPosition)
