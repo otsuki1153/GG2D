@@ -7,6 +7,8 @@ var dragStart := Vector2.ZERO
 @onready var line := Line2D.new()
 @export var ball: RigidBody2D
 
+@onready var  audioToma = $AudioStreamPlayer2D
+
 
 
 
@@ -49,7 +51,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				if force.length() > LimitForce:
 					force = force.normalized() * LimitForce
 					mouseGlobalPosition = dragStart - force
+				audioToma.pitch_scale = lerp(1.0, 0.5, force.length() / LimitForce)
+				audioToma.volume_db = lerp(-30.0, 50.0, force.length() / LimitForce)
 				ball.apply_force(force * LimitForce)
+				audioToma.play()
 	elif event is InputEventMouseMotion and dragging:
 		var mouseGlobalPosition = getMouseCamPosition()
 		var force = dragStart - mouseGlobalPosition
