@@ -1,7 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://du5vufwj0sjy0"]
+[gd_scene load_steps=10 format=3 uid="uid://du5vufwj0sjy0"]
 
 [ext_resource type="Texture2D" uid="uid://djasjiwkefbnt" path="res://Assets/Hole.png" id="1_4h5bc"]
 [ext_resource type="Script" uid="uid://y7tv2defj11q" path="res://Scenes/hole.gd" id="1_snr8g"]
+[ext_resource type="AudioStream" uid="uid://djyacegvqd3w7" path="res://Assets/8d82b5_Super_Mario_Bros_Coin_Sound_Effect.mp3" id="3_6w688"]
+
+[sub_resource type="Gradient" id="Gradient_snr8g"]
+colors = PackedColorArray(1, 1, 0.027451, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6w688"]
+gradient = SubResource("Gradient_snr8g")
+
+[sub_resource type="Curve" id="Curve_10x25"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.992647, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ailky"]
+curve = SubResource("Curve_10x25")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_snr8g"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+angular_velocity_min = -10.0
+angular_velocity_max = 9.99998
+radial_velocity_min = 100.0
+radial_velocity_max = 200.0
+gravity = Vector3(0, 300, 0)
+scale_min = 3.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_ailky")
+color_ramp = SubResource("GradientTexture1D_6w688")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4h5bc"]
 radius = 14.0
@@ -15,7 +43,18 @@ metadata/_edit_group_ = true
 texture_filter = 1
 texture = ExtResource("1_4h5bc")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 70
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_snr8g")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_4h5bc")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6w688")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

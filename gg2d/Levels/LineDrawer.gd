@@ -5,13 +5,13 @@ var dragStart := Vector2.ZERO
 @export var LimitForce: float = 300
 @export var maxShots: int  = 5
 var shotNumb: int = 0
-@onready var shotLabel := get_node("/root/MainGame/UI/shotLabel")
+@onready var shotLabel := get_node("/root/MainGame/UI/shotPanel/shotLabel")
 
 @onready var line := Line2D.new()
 @export var ball: RigidBody2D
 @onready var cam := ball.get_node("Camera2D")
 
-@onready var  audioToma = $AudioStreamPlayer2D
+@onready var  audioToma = $AudioStreamPlayer
 
 
 
@@ -61,7 +61,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					force = force.normalized() * LimitForce
 					mouseGlobalPosition = dragStart - force
 				#audioToma.pitch_scale = lerp(1.0, 0.5, force.length() / LimitForce)
-				audioToma.volume_db = lerp(-30.0, 10.0, force.length() / LimitForce)
+				audioToma.volume_db = lerp(-30.0, 20.0, force.length() / LimitForce)
 				var tween = get_tree().create_tween()
 				tween.tween_property(cam, "zoom", Vector2(1, 1), 0.3)
 				ball.apply_force(force * LimitForce)
