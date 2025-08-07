@@ -76,8 +76,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var mouseGlobalPosition = getMouseCamPosition()
 		var force = dragStart - mouseGlobalPosition
 
-		if force.length() > LimitForce:
-			force = force.normalized() * LimitForce
+		if force.length() > 150:
+			force = force.normalized() * 140
 			mouseGlobalPosition = dragStart - force
 
 		line.clear_points()
