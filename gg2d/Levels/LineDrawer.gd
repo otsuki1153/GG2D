@@ -25,6 +25,7 @@ func _ready() -> void:
 	line.set_texture_mode(Line2D.LineTextureMode.LINE_TEXTURE_TILE)
 	line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	line.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	#line.default_color = Color.CYAN
 	line.gradient = gradient
 	line.set_begin_cap_mode(Line2D.LineCapMode.LINE_CAP_ROUND)
 	line.set_end_cap_mode(Line2D.LINE_CAP_ROUND)
@@ -81,10 +82,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			mouseGlobalPosition = dragStart - force
 
 		line.clear_points()
-		line.add_point(ball.global_position)
-		line.add_point(mouseGlobalPosition)
+		line.add_point(Vector2.ZERO)
+		line.add_point(to_local(mouseGlobalPosition))
 
 func _physics_process(delta: float) -> void:
+	global_position = ball.global_position
 	if !dragging:
 		line.clear_points()
 		

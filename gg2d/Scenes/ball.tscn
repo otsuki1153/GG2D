@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://n5vggxk2qu0g" path="res://Scenes/ball.gd" id="1_ij5cq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ij5cq"]
-friction = 0.1
-bounce = 0.9
+rough = true
+bounce = 0.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ij5cq"]
-radius = 12.0416
+radius = 11.5264
 
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_mask = 7
@@ -19,11 +19,11 @@ script = ExtResource("1_ij5cq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0.555551, -0.0156765)
 texture = ExtResource("1_d60mj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, 0)
+position = Vector2(0.310883, -0.621764)
 shape = SubResource("CircleShape2D_ij5cq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
