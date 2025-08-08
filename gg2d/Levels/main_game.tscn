@@ -43,17 +43,18 @@ tile_map_data = PackedByteArray("AADx/xoAAAAEAAMAAADx/xkAAAAAAAMAAADx/xgAAAACAAM
 
 [node name="RigidBody2D" parent="." node_paths=PackedStringArray("line") instance=ExtResource("1_pn46k")]
 position = Vector2(132, 968)
-line = NodePath("../LineDrawer")
+line = NodePath("LineDrawer")
 
-[node name="LineDrawer" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("2_4cwk6")]
+[node name="LineDrawer" parent="RigidBody2D" node_paths=PackedStringArray("ball") instance=ExtResource("2_4cwk6")]
+position = Vector2(-132, -968)
 LimitForce = 900.0
-ball = NodePath("../RigidBody2D")
+ball = NodePath("..")
 
 [node name="Hole" parent="." node_paths=PackedStringArray("ball", "lineDrawer") instance=ExtResource("4_sijtq")]
 position = Vector2(1752, 962)
 scale = Vector2(2.08, 2.08)
 ball = NodePath("../RigidBody2D")
-lineDrawer = NodePath("../LineDrawer")
+lineDrawer = NodePath("../RigidBody2D/LineDrawer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 2)

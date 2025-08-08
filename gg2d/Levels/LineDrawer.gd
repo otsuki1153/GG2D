@@ -71,7 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				updateShotStatus()
 	elif event is InputEventMouseMotion and dragging:
 		var tween = get_tree().create_tween()
-		tween.tween_property(cam, "zoom", Vector2(2, 2), 0.3)	
+		tween.tween_property(cam, "zoom", Vector2(2, 2), 0.3)
 		if shotNumb >= maxShots:
 			return
 		var mouseGlobalPosition = getMouseCamPosition()
