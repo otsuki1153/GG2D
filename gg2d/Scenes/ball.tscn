@@ -10,7 +10,7 @@ bounce = 0.4
 [sub_resource type="CircleShape2D" id="CircleShape2D_ij5cq"]
 radius = 11.5264
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="ball" type="RigidBody2D"]
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ij5cq")
 gravity_scale = 0.0

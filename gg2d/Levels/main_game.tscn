@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bp27kkm6c7j3c"]
+[gd_scene load_steps=10 format=4 uid="uid://bp27kkm6c7j3c"]
 
 [ext_resource type="PackedScene" uid="uid://dn1ailvndq86x" path="res://Scenes/tile_map_layer.tscn" id="1_4cwk6"]
 [ext_resource type="AudioStream" uid="uid://fuawt4bobpfo" path="res://Assets/24. Swimming.mp3" id="1_cigus"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b3eegmgshkti4" path="res://Scenes/line_drawer.tscn" id="2_4cwk6"]
 [ext_resource type="FontFile" uid="uid://cfexbi8trgbki" path="res://Assets/minecraftia/Minecraftia-Regular.ttf" id="4_7v86k"]
 [ext_resource type="PackedScene" uid="uid://du5vufwj0sjy0" path="res://Scenes/Hole.tscn" id="4_sijtq"]
+[ext_resource type="Script" uid="uid://cfpk5ls1qk1nh" path="res://Levels/cameraController.gd" id="6_wlgu1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sijtq"]
 content_margin_left = 10.0
@@ -58,6 +59,9 @@ lineDrawer = NodePath("../LineDrawer")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 2)
 offset = Vector2(960, 540)
+script = ExtResource("6_wlgu1")
+ballPath = NodePath("../RigidBody2D")
+lineDrawerPath = NodePath("../LineDrawer")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

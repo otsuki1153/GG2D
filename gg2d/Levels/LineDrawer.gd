@@ -9,7 +9,7 @@ var shotNumb: int = 0
 
 @onready var line := Line2D.new()
 @export var ball: RigidBody2D
-@onready var cam := ball.get_node("Camera2D")
+#@onready var cam := ball.get_node("Camera2D")
 
 @onready var  audioToma = $AudioStreamPlayer
 
@@ -63,15 +63,15 @@ func _unhandled_input(event: InputEvent) -> void:
 					mouseGlobalPosition = dragStart - force
 				#audioToma.pitch_scale = lerp(1.0, 0.5, force.length() / LimitForce)
 				audioToma.volume_db = lerp(-30.0, 20.0, force.length() / LimitForce)
-				var tween = get_tree().create_tween()
-				tween.tween_property(cam, "zoom", Vector2(1, 1), 0.3)
+				#var tween = get_tree().create_tween()
+				#tween.tween_property(cam, "zoom", Vector2(1, 1), 0.3)
 				ball.apply_force(force * LimitForce)
 				shotNumb += 1
 				audioToma.play()
 				updateShotStatus()
 	elif event is InputEventMouseMotion and dragging:
-		var tween = get_tree().create_tween()
-		tween.tween_property(cam, "zoom", Vector2(2, 2), 0.3)	
+		#var tween = get_tree().create_tween()
+		#tween.tween_property(cam, "zoom", Vector2(2, 2), 0.3)	
 		if shotNumb >= maxShots:
 			return
 		var mouseGlobalPosition = getMouseCamPosition()
