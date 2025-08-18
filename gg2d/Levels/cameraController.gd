@@ -2,6 +2,7 @@ extends Camera2D
 
 @export var ballPath: NodePath
 @export var lineDrawerPath: NodePath
+@export var tutorialPath: NodePath
 
 @export var followZoom: float = 1.0
 @export var navZoom: float = 1.6
@@ -13,6 +14,7 @@ extends Camera2D
 var ball: RigidBody2D = null
 var lineDrawer: Node = null
 var ballCam: Camera2D = null
+var tutorialUI: TextureRect = null
 
 var targetZoomValue: float
 
@@ -21,7 +23,10 @@ func _ready() -> void:
 		ball = get_node(ballPath) as RigidBody2D
 		if ball and ball.has_node("Camera2D"):
 			ballCam = ball.get_node("Camera2D") as Camera2D
-			
+	
+	if tutorialPath != null and has_node(tutorialPath):
+		tutorialUI = get_node(tutorialPath)
+	
 	if lineDrawerPath != null and has_node(lineDrawerPath):
 		lineDrawer = get_node(lineDrawerPath)
 		
@@ -30,7 +35,9 @@ func _ready() -> void:
 		targetZoomValue = ballCam.zoom.x
 	else:
 		self.make_current()
-		targetZoomValue = ballCam.zoom.x
+		targetZoomValue = self.zoom.x
+		if ball:
+			global_position = ball.global_position
 		
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
@@ -60,16 +67,26 @@ func _process(delta: float) -> void:
 	if shouldFollow and ballCam:
 		 #_______Follow Mode_______
 		if not ballCam.is_current():
+			if tutorialUI:
+				tutorialUI.visible = false
 			global_position = ballCam.global_position
 			zoom = Vector2(ballCam.zoom.x, ballCam.zoom.y)
 			ballCam.make_current()
 			targetZoomValue = ballCam.zoom.x
 	else:
 		#_______Nav Mode_______
+		if tutorialUI:
+			tutorialUI.visible = true
 		if not self.is_current():
+			if ball:
+				self.global_position = ball.global_position
+				print("Posição da bola:") 
+				print(ball.global_position)
+				print("Posição da da camera:") 
+				print(self.global_position)
 			if ballCam:
-				global_position = ball.global_position
-				zoom = Vector2(ballCam.zoom.x, ballCam.zoom.y)
+				#self.global_position = ballCam.global_position
+				self.zoom = ballCam.zoom
 			self.make_current()
 			
 		var inputVec := Vector2(
@@ -79,7 +96,7 @@ func _process(delta: float) -> void:
 		if inputVec != Vector2.ZERO:
 			global_position += inputVec.normalized() * panSpeed * delta
 			
-		targetZoomValue = navZoom
+		#targetZoomValue = navZoom  <--- para desabilitar o zoom do mouse
 		
 		var currentZ := zoom.x
 		var newZ : float = lerp(currentZ, targetZoomValue, zoomSpeed * delta)

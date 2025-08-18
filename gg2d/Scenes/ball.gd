@@ -18,7 +18,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			
 			
 	if linear_velocity.length() > 1.0:
-		var friction = 3
+		var friction = 20
 		linear_velocity = linear_velocity.move_toward(Vector2.ZERO, friction * state.get_step())
 	else:
 		linear_velocity = Vector2.ZERO

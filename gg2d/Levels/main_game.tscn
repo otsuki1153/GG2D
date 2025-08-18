@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bp27kkm6c7j3c"]
+[gd_scene load_steps=11 format=4 uid="uid://bp27kkm6c7j3c"]
 
 [ext_resource type="PackedScene" uid="uid://dn1ailvndq86x" path="res://Scenes/tile_map_layer.tscn" id="1_4cwk6"]
 [ext_resource type="AudioStream" uid="uid://fuawt4bobpfo" path="res://Assets/24. Swimming.mp3" id="1_cigus"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://cfexbi8trgbki" path="res://Assets/minecraftia/Minecraftia-Regular.ttf" id="4_7v86k"]
 [ext_resource type="PackedScene" uid="uid://du5vufwj0sjy0" path="res://Scenes/Hole.tscn" id="4_sijtq"]
 [ext_resource type="Script" uid="uid://cfpk5ls1qk1nh" path="res://Levels/cameraController.gd" id="6_wlgu1"]
+[ext_resource type="Texture2D" uid="uid://cgnlqgvbd6g23" path="res://Assets/nav controll.png" id="8_7kt8a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sijtq"]
 content_margin_left = 10.0
@@ -58,10 +59,10 @@ lineDrawer = NodePath("../LineDrawer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 2)
-offset = Vector2(960, 540)
 script = ExtResource("6_wlgu1")
 ballPath = NodePath("../RigidBody2D")
 lineDrawerPath = NodePath("../LineDrawer")
+tutorialPath = NodePath("../UI/NavControlImage")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -71,10 +72,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 532.0
-offset_top = -541.0
-offset_right = 898.0
-offset_bottom = -443.0
+offset_left = 205.0
+offset_top = -320.0
+offset_right = 571.0
+offset_bottom = -222.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -100,3 +101,14 @@ text = "Tacadas 0/5
 label_settings = SubResource("LabelSettings_4cwk6")
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="NavControlImage" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = -1
+anchor_right = 0.035
+anchor_bottom = 0.065
+offset_right = -0.32
+offset_bottom = -0.120003
+scale = Vector2(2, 2)
+texture = ExtResource("8_7kt8a")
+stretch_mode = 5
