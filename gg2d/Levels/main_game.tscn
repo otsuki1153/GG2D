@@ -109,6 +109,6 @@ anchor_right = 0.035
 anchor_bottom = 0.065
 offset_right = -0.32
 offset_bottom = -0.120003
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 texture = ExtResource("8_7kt8a")
 stretch_mode = 5

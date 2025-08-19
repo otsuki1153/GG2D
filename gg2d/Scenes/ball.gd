@@ -22,6 +22,3 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		linear_velocity = linear_velocity.move_toward(Vector2.ZERO, friction * state.get_step())
 	else:
 		linear_velocity = Vector2.ZERO
-	
-		
-	
